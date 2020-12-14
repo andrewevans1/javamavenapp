@@ -39,7 +39,7 @@ save and exit
 `<escape>:x<enter>`
 
 ### Build the docker image
-build the contents of the current directory, with project1 tag 
+build the contents of the current directory, with project1 tag <br>
 `docker build . -t project1:latest`
 
 verify image has been created
@@ -55,27 +55,27 @@ Sync the Dockerfile with the remote repo
 `git push origin`
 
 ## Upload Image to Dockerhub
-login to dockerhub
-`docker login --username=yourhubusername`
+login to dockerhub<br>
+`docker login --username=yourhubusername`<br>
 enter your password when prompted
 </br>
-tag your image
+tag your image<br>
 `docker tag <image_id> yourhubusername/project1:firsttry`
 </br>
-push your image
+push your image<br>
 `docker push yourhubusername/project1`
 </br>
-verify image has been uploaded
+verify image has been uploaded<br>
 `docker pull yourhubusername/project1:firsttry`
 
 ## Setup Jenkins to Pull Image and Deploy
-install jenkins from the command line
-`sudo apt-get install jenkins`
-update the docker permissions for jenkins
-`sudo usermod -a -G docker jenkins`
-restart jenkins and docker for changes to take effect
-`sudo service docker restart`
-`sudo service jenkins restart`
+install jenkins from the command line<br>
+`sudo apt-get install jenkins`<br>
+update the docker permissions for jenkins<br>
+`sudo usermod -a -G docker jenkins`<br>
+restart jenkins and docker for changes to take effect<br>
+`sudo service docker restart`<br>
+`sudo service jenkins restart`<br>
 
 ### Configure Jenkins 
 navigate to the jenkins GUI in a browser
@@ -84,12 +84,12 @@ navigate to the jenkins GUI in a browser
 the required admin password can be found with the following command
 `sudo cat /var/lib/jenkins/secrets/initialAdminPassword`
 
-select install suggested plugins
-Create first admin user
-Click "create new jobs"
+- select install suggested plugins
+- Create first admin user
+- Click "create new jobs"
 
-Name the job "Project1" and select "Pipeline"
-Under "Build Triggers" select the "Poll SCM" checkbox. Set the schedule as "* * * * *". Note: there is a space after each *, there is no space after the last *.
+Name the job "Project1" and select "Pipeline"<br>
+Under "Build Triggers" select the "Poll SCM" checkbox. Set the schedule as "* * * * *". Note: there is a space after each *, there is no space after the last *.<br>
 Under the Pipeline section enter the following text
 <pre><code>pipeline {
     environment {
@@ -127,24 +127,28 @@ Under the Pipeline section enter the following text
 </code></pre>
 
 add dockerhub credentials
+<br>
 go to Account > credentials > Jenkins > Global > Add some credentials
-Kind: Username with password
-Scope: Glbal (Jenkins, nodes, items, all child items, etc)
-Username: yourhubusername
-Password: ********
-ID: dockerhub_id
-Description: Dockerhub Account
-
+<br>
+ - Kind: Username with password
+- Scope: Glbal (Jenkins, nodes, items, all child items, etc)
+- Username: yourhubusername
+- Password: ********
+- ID: dockerhub_id
+- Description: Dockerhub Account
+<br>
 add docker plugin to jenkins
+<br>
 Manage Jenkins > Plugin Manager > Available, Search for "Docker"
+<br>
 Select "Docker Pipeline," install without restart
 
 ### Trigger a Build
-Jenkins is configured to run the build process when it detects a change to the github repo.
-In the VM, edit the README.md file, adding some text.
-Then, push the changes to github.
-`git add .`
-`git commit -m "trigger jenkins"`
+Jenkins is configured to run the build process when it detects a change to the github repo.<br>
+In the VM, edit the README.md file, adding some text.<br>
+Then, push the changes to github.<br>
+`git add .`<br>
+`git commit -m "trigger jenkins"`<br>
 `git push origin`
-
+<br>
 Pull up the jenkins GUI, look at your Project1 Status. It should show a new build has executed and completed successfully.
