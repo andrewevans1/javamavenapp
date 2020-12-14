@@ -1,6 +1,6 @@
 FROM ubuntu
 
-
+RUN echo "starting dockerfile"
 
 # Install OpedJDK-8
 RUN apt-get update && \
@@ -17,6 +17,7 @@ RUN git clone https://github.com/SimplilearnDevOpsOfficial/javamavenapp.git
 # change the working directory
 WORKDIR javamavenapp
 
+RUN echo "building java app"
 # compile java app
 RUN mvn package
 
