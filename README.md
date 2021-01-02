@@ -70,6 +70,10 @@ verify image has been uploaded<br>
 
 ## Setup Jenkins to Pull Image and Deploy
 install jenkins from the command line<br>
+`wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -`<br>
+`sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > \
+    /etc/apt/sources.list.d/jenkins.list'`<br>
+`sudo apt-get update`<br>
 `sudo apt-get install jenkins`<br>
 update the docker permissions for jenkins<br>
 `sudo usermod -a -G docker jenkins`<br>
